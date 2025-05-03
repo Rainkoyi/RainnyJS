@@ -1,0 +1,1 @@
+Run `node .` in the base dir to start the bot
