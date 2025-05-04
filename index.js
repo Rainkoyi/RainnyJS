@@ -19,6 +19,40 @@ const client = new Client({
   ],
 });
 
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(bodyParser.json());
+
+app.post("/send-message", async (req, res) => {
+  const { channel, message } = req.body;
+  if (!channel || !message) {
+    return res.status(400).json({ error: "Missing channel or message" });
+  }
+  try {
+    const targetChannel = await client.channels.fetch(channel);
+    if (!targetChannel || !targetChannel.send) {
+      return res
+        .status(404)
+        .json({ error: "Channel not found or cannot send messages" });
+    }
+    await targetChannel.send(message);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to send message" });
+  }
+});
+
+client.once("ready", () => {
+  app.listen(PORT, () => {
+    console.log(`HTTP server listening on port ${PORT}`);
+  });
+});
+
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, "commands");
