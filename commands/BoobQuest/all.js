@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-// subcommands
+// tutorials
 // https://docs.discordnet.dev/guides/int_basics/application-commands/slash-commands/subcommands.html
+// https://discordjs.guide/slash-commands/parsing-options.html#subcommands
 
 module.exports = {
   data: new SlashCommandBuilder()
