@@ -8,26 +8,26 @@ module.exports = {
     .setName("bq")
     .setDescription("Command for all interactions with BoobQuest.")
     .addSubcommand(subcommand => subcommand
-			.setName("paycheck")
-			.setDescription("Get some money (cooldown: 1h).")
+      .setName("paycheck")
+      .setDescription("Get some money (cooldown: 1h).")
     )
     .addSubcommand(subcommand => subcommand
-			.setName("roulette")
-			.setDescription("Gamble.")
+      .setName("roulette")
+      .setDescription("Gamble.")
       .addIntegerOption(option => option
         .setName("wager")
-  			.setDescription("How much money you want to bet.")
+        .setDescription("How much money you want to bet.")
         .setRequired(true)
       )
       .addStringOption(option => option
         .setName("color")
         .setDescription("What color you're betting on.")
-    		.setRequired(true)
-    		.addChoices(
-    			{ name: "Red", value: "0" },
-    			{ name: "Black", value: "1" }
-    		)
-    	)
+        .setRequired(true)
+        .addChoices(
+          { name: "Red", value: "0" },
+          { name: "Black", value: "1" }
+        )
+      )
     )
   ,
   async execute(interaction) {
