@@ -7,3 +7,8 @@ curl -Method POST http://localhost:3001/send-message `
   -Headers @{ "Content-Type" = "application/json" } `
   -Body '{ "channel": "123", "message": "Hello world!" }'
 ```
+
+# Useful documentation pages
+https://discord.js.org/docs/packages/discord.js/14.19.3/CommandInteraction:Class
+https://discord.js.org/docs/packages/discord.js/14.19.3/Client:Class
+https://discord.js.org/docs/packages/discord.js/14.19.3/TextChannel:Class
