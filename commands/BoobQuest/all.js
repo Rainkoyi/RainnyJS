@@ -65,7 +65,7 @@ module.exports = {
         break;
 
         case "testembed":
-          interaction.reply({ embeds: [exampleEmbed] });
+          await interaction.reply({ embeds: [exampleEmbed] });
           break;
     }
   }
