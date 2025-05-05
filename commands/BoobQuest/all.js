@@ -52,7 +52,7 @@ module.exports = {
     switch(interaction.options.getSubcommand()) {
         
       case "paycheck":
-        await interaction.reply("You chose paycheck.");
+        await interaction.reply("You didn't get paid 'cuz I HATE you.");
         break;
         
       case "roulette":
@@ -60,9 +60,9 @@ module.exports = {
         let resultColor = Math.floor(Math.random() * 2) == 0 ? "red" : "black";
 
         if (betColor === resultColor) {
-          await interaction.reply("You bet on " + betColor + " and won! You won " + interaction.options.getInteger("wager") + cashEmoji + " (new balance: $0).");
+          await interaction.reply(`You bet on ${betColor} and won! You won ${interaction.options.getInteger("wager") + cashEmoji} (new balance: 0${cashEmoji}).`);
         } else {
-          await interaction.reply("You bet on " + betColor + ", but it's " + resultColor + "! You lost " + interaction.options.getInteger("wager") + cashEmoji + " (remaining balance: $0).");
+          await interaction.reply(`You bet on ${betColor}, but it's ${resultColor}! You lost ${interaction.options.getInteger("wager") + cashEmoji} (remaining balance: 0${cashEmoji}).`);
         }
         break;
 
