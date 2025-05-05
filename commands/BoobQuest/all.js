@@ -1,20 +1,9 @@
+// tutorial
+// https://discordjs.guide/slash-commands/parsing-options.html#subcommands
+
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 const cashEmoji = "<:diamondwebp:1368797185235488868>";
-
-const exampleEmbed = new EmbedBuilder()
-	.setColor(0x0099FF)
-	.setTitle("Uzaki Hana")
-	// .setDescription('Some description here')
-	.setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
-	.addFields(
-		{ name: "Cup Size", value: "DD (+11" + cashEmoji + "/paycheck)" },
-		{ name: "From", value: "*Uzaki-chan Wants to Hang Out!*" },
-	)
-	.setFooter({ text: "BoobQuest" });
-
-// tutorial
-// https://discordjs.guide/slash-commands/parsing-options.html#subcommands
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -67,7 +56,18 @@ module.exports = {
         break;
 
         case "testembed":
-          await interaction.reply({ embeds: [exampleEmbed] });
+          await interaction.reply({ embeds: [
+            new EmbedBuilder()
+            	.setColor(0x0099FF)
+            	.setTitle("Uzaki Hana")
+            	// .setDescription('Some description here')
+            	.setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
+            	.addFields(
+            		{ name: "Cup Size", value: `DD (+11${cashEmoji}/paycheck)` },
+            		{ name: "From", value: "*Uzaki-chan Wants to Hang Out!*" },
+            	)
+            	.setFooter({ text: "BoobQuest" })
+          ] });
           break;
     }
   }
