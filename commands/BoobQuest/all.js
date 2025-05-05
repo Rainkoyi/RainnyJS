@@ -1,23 +1,44 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-// tutorials
-// https://docs.discordnet.dev/guides/int_basics/application-commands/slash-commands/subcommands.html
+// tutorial
 // https://discordjs.guide/slash-commands/parsing-options.html#subcommands
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bq")
     .setDescription("Command for all interactions with BoobQuest.")
-    .addStringOption(option => option.setName('testchoice')
-		.setDescription('A test parameter.')
-		.setRequired(true)
-		.addChoices(
-			{ name: 'Lemon', value: 'lemon' },
-			{ name: 'Apple', value: 'apple' },
-			{ name: 'Pear', value: 'pear' }
-		)
-	),
+    .addSubcommand(subcommand => subcommand
+      .setName("paycheck")
+      .setDescription("Get some money (cooldown: 1h).")
+    )
+    .addSubcommand(subcommand => subcommand
+      .setName("roulette")
+      .setDescription("Gamble.")
+      .addIntegerOption(option => option
+        .setName("wager")
+        .setDescription("How much money you want to bet.")
+        .setRequired(true)
+      )
+      .addStringOption(option => option
+        .setName("color")
+        .setDescription("What color you're betting on.")
+        .setRequired(true)
+        .addChoices(
+          { name: "Red", value: "red" },
+          { name: "Black", value: "black" }
+        )
+      )
+    )
+  ,
   async execute(interaction) {
-    await interaction.reply("You chose " + interaction.options.getString('testchoice') + ".");
+
+    switch(interaction.options.getSubcommand()) {
+      case "paycheck":
+        await interaction.reply("You chose paycheck.");
+        break;
+      case "roulette":
+        await interaction.reply("You bet on " + interaction.options.getString("color") + ", but it's green! You lost $" + interaction.options.getInteger("wager") + ".");
+        break;
+    }
   }
 };
