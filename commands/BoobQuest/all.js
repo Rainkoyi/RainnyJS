@@ -1,12 +1,14 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
+const cashEmoji = "<:diamondwebp:1368797185235488868>";
+
 const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setTitle("Uzaki Hana")
 	// .setDescription('Some description here')
 	.setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
 	.addFields(
-		{ name: "Cup Size", value: "DD (:coin:+11/paycheck)" },
+		{ name: "Cup Size", value: "DD (+11" + cashEmoji + "/paycheck)" },
 		{ name: "From", value: "Uzaki-chan Wants to Hang Out!" },
 	)
 	.setFooter({ text: "BoobQuest" });
@@ -58,9 +60,9 @@ module.exports = {
         let resultColor = Math.floor(Math.random() * 2) == 0 ? "red" : "black";
 
         if (betColor === resultColor) {
-          await interaction.reply("You bet on " + betColor + " and won! You won :thinkwelch:" + interaction.options.getInteger("wager") + " (new balance: $0).");
+          await interaction.reply("You bet on " + betColor + " and won! You won " + interaction.options.getInteger("wager") + cashEmoji + " (new balance: $0).");
         } else {
-          await interaction.reply("You bet on " + betColor + ", but it's " + resultColor + "! You lost :thinkwelch:" + interaction.options.getInteger("wager") + " (remaining balance: $0).");
+          await interaction.reply("You bet on " + betColor + ", but it's " + resultColor + "! You lost " + interaction.options.getInteger("wager") + cashEmoji + " (remaining balance: $0).");
         }
         break;
 
