@@ -33,8 +33,7 @@ module.exports = {
         await interaction.reply("You chose paycheck.");
         break;
       case "buyfruit":
-        await interaction.reply("You chose buyfruit.");
-        // await interaction.reply("You chose " + interaction.options.getString('testchoice') + ".");
+        await interaction.reply("You chose buyfruit and bought: " + interaction.options.getString('testchoice') + ".");
         break;
     }
   }
