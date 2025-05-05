@@ -65,7 +65,7 @@ module.exports = {
         break;
 
         case "testembed":
-          interaction.channel.send({ embeds: [exampleEmbed] });
+          interaction.reply({ embeds: [exampleEmbed] });
           break;
     }
   }
