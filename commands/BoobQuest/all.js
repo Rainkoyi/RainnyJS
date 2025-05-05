@@ -37,7 +37,7 @@ module.exports = {
         await interaction.reply("You chose paycheck.");
         break;
       case "roulette":
-        await interaction.reply("You bet on " + interaction.options.getString("color") + ", but it's green! You lost $" + interaction.options.getString("wager") + ".");
+        await interaction.reply("You bet on " + interaction.options.getString("color") + ", but it's green! You lost $" + interaction.options.getInteger("wager") + ".");
         break;
     }
   }
