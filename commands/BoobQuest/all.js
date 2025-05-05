@@ -85,7 +85,7 @@ module.exports = {
         if (!user) {
           user = interaction.user;
         }
-        await interaction.reply("You want to see the profile of " + user.username);
+        await interaction.reply(`You want to see the profile of ${user.username} (${user.id}).`);
         break;
     }
   }
