@@ -9,7 +9,7 @@ const exampleEmbed = new EmbedBuilder()
 	.setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
 	.addFields(
 		{ name: "Cup Size", value: "DD (+11" + cashEmoji + "/paycheck)" },
-		{ name: "From", value: "Uzaki-chan Wants to Hang Out!" },
+		{ name: "From", value: "*Uzaki-chan Wants to Hang Out!*" },
 	)
 	.setFooter({ text: "BoobQuest" });
 
