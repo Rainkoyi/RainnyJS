@@ -42,7 +42,7 @@ module.exports = {
     .addSubcommand(subcommand => subcommand
       .setName("user")
       .setDescription("See others' BoobQuest profile.")
-      .addUserOption(option => option.setName("user").setDescription("The user whose profile you want to see.")))
+      .addUserOption(option => option.setName("user").setDescription("The user whose profile you want to see.").setRequired(true))
     )
   ,
   async execute(interaction) {
@@ -79,9 +79,13 @@ module.exports = {
         ] });
         break;
 
-      case "me":
       case "user":
-        await interaction.reply("You want to see a profile.");
+        var user = interaction.options.getUser("user");
+      case "me":
+        if (!user) {
+          user = interaction.user;
+        }
+        await interaction.reply("You want to see the profile of " + user.username);
         break;
     }
   }
