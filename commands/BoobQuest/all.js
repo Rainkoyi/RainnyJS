@@ -3,6 +3,9 @@ const { SlashCommandBuilder } = require("discord.js");
 // tutorial
 // https://discordjs.guide/slash-commands/parsing-options.html#subcommands
 
+// https://i.pinimg.com/236x/9d/0f/a3/9d0fa3da5c7d68f800baf1dcbbb76e70.jpg
+// Cup Size: DD (:coin:+11/paycheck)
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bq")
