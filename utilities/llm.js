@@ -1,5 +1,6 @@
 require("dotenv").config();
 const LLM_KEY = process.env.LLM_KEY;
+const LLM_MODEL = process.env.LLM_MODEL;
 
 async function getLLMResponse(prompt) {
   try {
@@ -12,7 +13,7 @@ async function getLLMResponse(prompt) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "microsoft/phi-4-reasoning-plus:free",
+          model: LLM_MODEL,
           messages: [{ role: "user", content: prompt }],
         }),
       }

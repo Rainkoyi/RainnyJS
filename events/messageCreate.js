@@ -1,4 +1,6 @@
 const { Events } = require("discord.js");
+const { getLLMResponse } = require("../utilities/llm");
+const { splitMessage } = require("../utilities/discord-message-split");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -24,14 +26,22 @@ module.exports = {
 
     // Respond to mentions or replies
     if (mentionedBot || isReplyToBot) {
-      // Customize your response here
-      const response = `Hey ${message.author}, you mentioned or replied to me! How can I help?`;
+      // Show typing indicator
+      await message.channel.sendTyping();
+
+      // Get AI response and split in case of long messages
+      const response = await getLLMResponse(message.content);
+      const messages = splitMessage(response);
+      console.log(messages);
 
       // Send response with a mention
       await message.reply({
-        content: response,
+        content: messages[0],
         allowedMentions: { repliedUser: true },
       });
+      for (let i = 1; i < messages.length; i++) {
+        await message.channel.send(messages[i]);
+      }
     }
   },
 };
