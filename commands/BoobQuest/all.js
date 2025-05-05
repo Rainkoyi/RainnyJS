@@ -35,6 +35,15 @@ module.exports = {
       .setName("testembed")
       .setDescription("Test waifu embeds.")
     )
+    .addSubcommand(subcommand => subcommand
+      .setName("me")
+      .setDescription("See your own BoobQuest profile.")
+    )
+    .addSubcommand(subcommand => subcommand
+      .setName("user")
+      .setDescription("See others' BoobQuest profile.")
+      .addUserOption(option => option.setName("user").setDescription("The user whose profile you want to see.")))
+    )
   ,
   async execute(interaction) {
 
@@ -55,20 +64,25 @@ module.exports = {
         }
         break;
 
-        case "testembed":
-          await interaction.reply({ embeds: [
-            new EmbedBuilder()
-            	.setColor(0x0099FF)
-            	.setTitle("Uzaki Hana")
-            	// .setDescription('Some description here')
-            	.setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
-            	.addFields(
-            		{ name: "Cup Size", value: `DD (+11${cashEmoji}/paycheck)` },
-            		{ name: "From", value: "*Uzaki-chan Wants to Hang Out!*" },
-            	)
-            	.setFooter({ text: "BoobQuest" })
-          ] });
-          break;
+      case "testembed":
+        await interaction.reply({ embeds: [
+          new EmbedBuilder()
+            .setColor(0x0099FF)
+            .setTitle("Uzaki Hana")
+            // .setDescription('Some description here')
+            .setThumbnail("https://ih1.redbubble.net/image.4598705569.7727/raf,360x360,075,t,fafafa:ca443f4786.jpg")
+            .addFields(
+              { name: "Cup Size", value: `DD (+11${cashEmoji}/paycheck)` },
+              { name: "From", value: "*Uzaki-chan Wants to Hang Out!*" },
+            )
+            .setFooter({ text: "BoobQuest" })
+        ] });
+        break;
+
+      case "me":
+      case "user":
+        await interaction.reply("You want to see a profile.");
+        break;
     }
   }
 };
