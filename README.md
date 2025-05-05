@@ -1,4 +1,5 @@
 Run `node .` in the base dir to start the bot
+Run `docker-compose up -d` in base dir to start the database
 
 # Send message in channel
 To send a message `Hello world!` to a Discord channel with id `123`
