@@ -24,8 +24,8 @@ module.exports = {
         .setDescription("What color you're betting on.")
         .setRequired(true)
         .addChoices(
-          { name: "Red", value: "0" },
-          { name: "Black", value: "1" }
+          { name: "Red", value: "red" },
+          { name: "Black", value: "black" }
         )
       )
     )
