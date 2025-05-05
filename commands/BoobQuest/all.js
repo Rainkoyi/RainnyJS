@@ -8,22 +8,26 @@ module.exports = {
     .setName("bq")
     .setDescription("Command for all interactions with BoobQuest.")
     .addSubcommand(subcommand => subcommand
-			.setName('paycheck')
-			.setDescription('Get some money (cooldown: 1h).')
+			.setName("paycheck")
+			.setDescription("Get some money (cooldown: 1h).")
     )
     .addSubcommand(subcommand => subcommand
-			.setName('buyfruit')
-			.setDescription('Test subcommand.')
-     //  .addStringOption(option => option
-     //    .setName('fruit')
-     //    .setDescription('Test parameter.')
-    	// 	.setRequired(true)
-    	// 	.addChoices(
-    	// 		{ name: 'Lemon', value: 'lemon' },
-    	// 		{ name: 'Apple', value: 'apple' },
-    	// 		{ name: 'Pear', value: 'pear' }
-    	// 	)
-    	// )
+			.setName("roulette")
+			.setDescription("Gamble.")
+      .addIntegerOption(option => option
+        .setName("wager")
+  			.setDescription("How much money you want to bet.")
+        .setRequired(true)
+      )
+      .addStringOption(option => option
+        .setName("color")
+        .setDescription("What color you're betting on.")
+    		.setRequired(true)
+    		.addChoices(
+    			{ name: "Red", value: "0" },
+    			{ name: "Black", value: "1" }
+    		)
+    	)
     )
   ,
   async execute(interaction) {
@@ -32,8 +36,8 @@ module.exports = {
       case "paycheck":
         await interaction.reply("You chose paycheck.");
         break;
-      case "buyfruit":
-        await interaction.reply("You chose buyfruit and bought: " + interaction.options.getString('testchoice') + ".");
+      case "roulette":
+        await interaction.reply("You bet on " + interaction.options.getString("color") + ", but it's green! You lost $" + interaction.options.getString("wager") + ".");
         break;
     }
   }
