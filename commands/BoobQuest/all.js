@@ -37,7 +37,15 @@ module.exports = {
         await interaction.reply("You chose paycheck.");
         break;
       case "roulette":
-        await interaction.reply("You bet on " + interaction.options.getString("color") + ", but it's green! You lost $" + interaction.options.getInteger("wager") + ".");
+
+        let betColor = interaction.options.getString("color");
+        let resultColor = Math.floor(Math.random() * 2) == 0 ? "red" : "black";
+
+        if (betColor === resultColor) {
+          await interaction.reply("You bet on " + betColor + " and won! You won 🪙" + interaction.options.getInteger("wager") + " (new balance: $0).");
+        } else {
+          await interaction.reply("You bet on " + betColor + ", but it's " + resultColor + "! You lost 🪙" + interaction.options.getInteger("wager") + " (remaining balance: $0).");
+        }
         break;
     }
   }
