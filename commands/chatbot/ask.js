@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { getLLMResponse } = require("../../utilities/llm");
-const { splitMessage } = require("../../utilities/discord-message-split");
+const { getLLMResponse } = require("../../utilities/llm.js");
+const { splitMessage } = require("../../utilities/discord-message-split.js");
 const {
   getUserMemory,
   updateUserMemory,
