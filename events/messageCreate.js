@@ -5,6 +5,8 @@ const {
   getUserMemory,
   updateUserMemory,
 } = require("../utilities/db-chatbot-memory.js");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -39,10 +41,16 @@ module.exports = {
       const memory = await getUserMemory(userId);
       const prompt = `${memory}\n${userName}:\n${userMessage}\n${botName}:\n`;
 
+      // Read character settings from file and replace placeholders
+      const filePath = path.join(__dirname, "../test.txt");
+      const characterSettings = fs
+        .readFileSync(filePath, "utf8")
+        .replace("{{user}}", userName)
+        .replace("{{bot}}", botName);
       // Get AI response and split in case of long messages
-      const response = await getLLMResponse(prompt);
+      const response = await getLLMResponse(characterSettings + prompt);
       const messages = splitMessage(response);
-      console.log(messages);
+      // console.log(messages);
 
       // store memory
       const newMemory = `${prompt}${response}`;
