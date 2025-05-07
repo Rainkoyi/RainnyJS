@@ -12,7 +12,7 @@ const client = new Client({
 async function connectDB() {
   try {
     await client.connect();
-    console.log("Connected to PostgreSQL!");
+    console.log("Connected to PostgreSQL");
 
     const res = await client.query("SELECT NOW()");
     console.log(res.rows[0]);

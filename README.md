@@ -1,3 +1,4 @@
+
 Run `node .` in the base dir to start the bot
 Run `docker-compose up -d` in base dir to start the database
 Run `docker-compose down -v` to delete container if envs are changed
