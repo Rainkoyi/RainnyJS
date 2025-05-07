@@ -4,11 +4,11 @@ services:
     container_name: my_postgres
     restart: always
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"  # Expose PostgreSQL to your host machine
+      - "${DB_PORT}:5432"  # Expose PostgreSQL to your host machine
     volumes:
       - pgdata:/var/lib/postgresql/data
 
