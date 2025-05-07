@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dbtest": "node dbtest.js",
+    "llmtest": "node llmtest.js",
+    "commands": "node deploy-commands.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,7 +14,8 @@
   "dependencies": {
     "discord.js": "^14.19.3",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pg": "^8.15.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
