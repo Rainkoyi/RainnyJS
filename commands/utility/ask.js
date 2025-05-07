@@ -25,7 +25,7 @@ module.exports = {
     const userId = interaction.user.id;
     const botName = interaction.client.user.displayName;
     const memory = await getUserMemory(userId);
-    const prompt = `${memory}\n${userName}: ${userMessage}\n${botName}:`;
+    const prompt = `${memory}\n${userName}:\n${userMessage}\n${botName}:\n`;
 
     // Get AI response and split in case of long messages
     const response = await getLLMResponse(prompt);
@@ -35,6 +35,7 @@ module.exports = {
     // store memory
     const newMemory = `${prompt}${response}`;
     await updateUserMemory(userId, newMemory);
+    console.log(newMemory);
 
     // Send messages as a reply to the interaction
     await interaction.editReply(messages[0]);
