@@ -22,7 +22,12 @@ async function getLLMResponse(prompt) {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    const message = data.choices[0].message.content;
+    if (message.length > 0) {
+      return message;
+    } else {
+      return "Sorry, I couldn't think of anything.";
+    }
   } catch (error) {
     console.error("LLM API Error:", error);
     return "Sorry, I'm having trouble thinking right now.";
