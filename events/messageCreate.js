@@ -37,7 +37,7 @@ module.exports = {
       const userId = message.author.id;
       const botName = message.client.user.displayName;
       const memory = await getUserMemory(userId);
-      const prompt = `${memory}\n${userName}: ${userMessage}\n${botName}:`;
+      const prompt = `${memory}\n${userName}:\n${userMessage}\n${botName}:\n`;
 
       // Get AI response and split in case of long messages
       const response = await getLLMResponse(prompt);
@@ -47,6 +47,7 @@ module.exports = {
       // store memory
       const newMemory = `${prompt}${response}`;
       await updateUserMemory(userId, newMemory);
+      console.log(newMemory);
 
       // Send response with a mention
       await message.reply({
