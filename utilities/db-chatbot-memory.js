@@ -27,6 +27,7 @@ async function getUserMemory(userId) {
 }
 
 async function updateUserMemory(userId, newMemory) {
+  const contextLength = parseInt(process.env.LLM_CONTEXT_LENGTH);
   try {
     await pool.query(
       `
@@ -36,7 +37,7 @@ async function updateUserMemory(userId, newMemory) {
             DO UPDATE SET 
                 memory = EXCLUDED.memory
         `,
-      [userId, newMemory]
+      [userId, newMemory.slice(-contextLength)] // Limit memory to context length
     );
   } catch (err) {
     console.error("Error updating user memory:", err);
