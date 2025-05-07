@@ -1,6 +1,10 @@
 const { Events } = require("discord.js");
 const { getLLMResponse } = require("../utilities/llm");
 const { splitMessage } = require("../utilities/discord-message-split");
+const {
+  getUserMemory,
+  updateUserMemory,
+} = require("../utilities/db-chatbot-memory.js");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -28,11 +32,21 @@ module.exports = {
     if (mentionedBot || isReplyToBot) {
       // Show typing indicator
       await message.channel.sendTyping();
+      const userMessage = message.content;
+      const userName = message.author.displayName;
+      const userId = message.author.id;
+      const botName = message.client.user.displayName;
+      const memory = await getUserMemory(userId);
+      const prompt = `${memory}\n${userName}: ${userMessage}\n${botName}:`;
 
       // Get AI response and split in case of long messages
-      const response = await getLLMResponse(message.content);
+      const response = await getLLMResponse(prompt);
       const messages = splitMessage(response);
       console.log(messages);
+
+      // store memory
+      const newMemory = `${prompt}${response}`;
+      await updateUserMemory(userId, newMemory);
 
       // Send response with a mention
       await message.reply({
