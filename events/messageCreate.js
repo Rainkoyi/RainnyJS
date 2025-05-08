@@ -5,6 +5,8 @@ const {
   getUserMemory,
   updateUserMemory,
 } = require("../utilities/db-chatbot-memory.js");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -32,22 +34,31 @@ module.exports = {
     if (mentionedBot || isReplyToBot) {
       // Show typing indicator
       await message.channel.sendTyping();
-      const userMessage = message.content;
+      const botName = message.client.user.displayName;
+      const botId = message.client.user.id;
+      const userMessage = message.content.replaceAll(`<@${botId}>`, "");
       const userName = message.author.displayName;
       const userId = message.author.id;
-      const botName = message.client.user.displayName;
       const memory = await getUserMemory(userId);
       const prompt = `${memory}\n${userName}:\n${userMessage}\n${botName}:\n`;
 
+      // Read character settings from file and replace placeholders
+      const filePath = path.join(__dirname, "../test.txt");
+      const characterSettings = fs
+        .readFileSync(filePath, "utf8")
+        .replaceAll("{{user}}", userName)
+        .replaceAll("{{char}}", botName);
       // Get AI response and split in case of long messages
-      const response = await getLLMResponse(prompt);
+      const input = characterSettings + prompt;
+      console.log("Input to LLM:", input);
+      const response = await getLLMResponse(input);
       const messages = splitMessage(response);
-      console.log(messages);
+      console.log("Response from LLM:", response);
 
       // store memory
       const newMemory = `${prompt}${response}`;
       await updateUserMemory(userId, newMemory);
-      console.log(newMemory);
+      console.log("Updated memory:", newMemory);
 
       // Send response with a mention
       await message.reply({
