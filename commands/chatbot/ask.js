@@ -22,10 +22,13 @@ module.exports = {
   async execute(interaction) {
     // Defer reply while processing
     await interaction.deferReply();
-    const userMessage = interaction.options.getString("prompt");
+    const botName = interaction.client.user.displayName;
+    const botId = interaction.client.user.id;
+    const userMessage = interaction.options
+      .getString("prompt")
+      .replaceAll(`<@${botId}>`, "");
     const userName = interaction.user.displayName;
     const userId = interaction.user.id;
-    const botName = interaction.client.user.displayName;
     const memory = await getUserMemory(userId);
     const prompt = `${memory}\n${userName}:\n${userMessage}\n${botName}:\n`;
 
@@ -33,8 +36,8 @@ module.exports = {
     const filePath = path.join(__dirname, "../../test.txt");
     const characterSettings = fs
       .readFileSync(filePath, "utf8")
-      .replace(/{{user}}/g, userName)
-      .replace(/{{char}}/g, botName);
+      .replaceAll("{{user}}", userName)
+      .replaceAll("{{char}}", botName);
     // Get AI response and split in case of long messages
     const input = characterSettings + prompt;
     console.log("Input to LLM:", input);
