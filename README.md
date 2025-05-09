@@ -69,7 +69,7 @@ To send a ban embed message to a Discord channel with id `1365476539558268988`
 curl -Method POST http://localhost:3001/send-ban-embed `
   -Headers @{ "Content-Type" = "application/json" } `
   -Body '{ "channel": "1365476539558268988", "message": "I was just wondering how you knew",
-  "username": "tofutheloafu", "platform": "twitch", "userurl": "https://twitch.tv/tofutheloafu"}'
+  "username": "tofutheloafu", "platform": "twitch"}'
 ```
 
 # Useful documentation pages
