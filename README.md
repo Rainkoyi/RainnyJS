@@ -63,6 +63,15 @@ curl -Method POST http://localhost:3001/send-message `
   -Body '{ "channel": "123", "message": "Hello world!" }'
 ```
 
+# Send ban embed message in channel
+To send a ban embed message to a Discord channel with id `1365476539558268988`
+```powershell
+curl -Method POST http://localhost:3001/send-ban-embed `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{ "channel": "1365476539558268988", "message": "I was just wondering how you knew",
+  "username": "tofutheloafu", "platform": "twitch", "userurl": "https://twitch.tv/tofutheloafu"}'
+```
+
 # Useful documentation pages
 https://discord.js.org/docs/packages/discord.js/14.19.3/CommandInteraction:Class
 https://discord.js.org/docs/packages/discord.js/14.19.3/Client:Class
