@@ -8,6 +8,7 @@ const {
   Events,
   GatewayIntentBits,
   MessageFlags,
+  EmbedBuilder,
 } = require("discord.js");
 
 // Create a new client instance
@@ -40,6 +41,51 @@ app.post("/send-message", async (req, res) => {
         .json({ error: "Channel not found or cannot send messages" });
     }
     await targetChannel.send(message);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to send message" });
+  }
+});
+
+app.post("/send-ban-embed", async (req, res) => {
+  const { channel, username, userurl, platform, message } = req.body;
+  if (!channel || !message || !username || !platform || !userurl) {
+    return res.status(400).json({ error: "Missing fields!" });
+  }
+  try {
+    const targetChannel = await client.channels.fetch(channel);
+    if (!targetChannel || !targetChannel.send) {
+      return res
+        .status(404)
+        .json({ error: "Channel not found or cannot send messages" });
+    }
+    const platformData = {
+      youtube: {
+        iconURL: "https://i.imgur.com/K36HClN.png",
+        color: 0xff0000,
+      },
+      twitch: {
+        iconURL: "https://i.imgur.com/olAHeyP.png",
+        color: 0x6441a4,
+      },
+    };
+
+    const { iconURL, color } = platformData[platform] || {};
+
+    // Create an embed message
+    const banEmbed = new EmbedBuilder()
+      .setColor(color)
+      .setTitle(username)
+      .setURL(userurl)
+      .setAuthor({
+        name: "Banned!",
+        iconURL: iconURL,
+      })
+      .setDescription(message)
+      .setThumbnail("https://i.imgur.com/ExAIigt.jpeg")
+      .setTimestamp();
+    await targetChannel.send({ embeds: [banEmbed] });
     res.json({ success: true });
   } catch (err) {
     console.error(err);
