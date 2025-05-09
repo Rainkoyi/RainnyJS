@@ -49,8 +49,8 @@ app.post("/send-message", async (req, res) => {
 });
 
 app.post("/send-ban-embed", async (req, res) => {
-  const { channel, username, userurl, platform, message } = req.body;
-  if (!channel || !message || !username || !platform || !userurl) {
+  const { channel, username, platform, message } = req.body;
+  if (!channel || !message || !username || !platform) {
     return res.status(400).json({ error: "Missing fields!" });
   }
   try {
@@ -77,7 +77,6 @@ app.post("/send-ban-embed", async (req, res) => {
     const banEmbed = new EmbedBuilder()
       .setColor(color)
       .setTitle(username)
-      .setURL(userurl)
       .setAuthor({
         name: "Banned!",
         iconURL: iconURL,
