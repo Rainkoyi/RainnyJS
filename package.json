@@ -5,7 +5,9 @@
   "scripts": {
     "dbtest": "node dbtest.js",
     "llmtest": "node llmtest.js",
-    "commands": "node deploy-commands.js",
+    "ctable": "node createTable.js",
+    "addc": "node deploy-commands.js",
+    "delc": "node delete-commands.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
