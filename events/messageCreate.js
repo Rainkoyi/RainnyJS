@@ -33,7 +33,7 @@ module.exports = {
     // Respond to mentions or replies
     if (mentionedBot || isReplyToBot) {
       // Show typing indicator
-      await message.channel.sendTyping();
+      // await message.channel.sendTyping();
       const botName = message.client.user.displayName;
       const botId = message.client.user.id;
       const userMessage = message.content.replaceAll(`<@${botId}>`, "");
