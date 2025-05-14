@@ -12,5 +12,34 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discord_bot
+    restart: always
+    environment:
+      # Discord
+      API_KEY: ${API_KEY}
+      BOT_ID: ${BOT_ID}
+      SERVER_ID: ${SERVER_ID}
+      # OpenRouter
+      LLM_KEY: ${LLM_KEY}
+      LLM_MODEL: ${LLM_MODEL}
+      LLM_CONTEXT_LENGTH: ${LLM_CONTEXT_LENGTH}
+      # Database
+      DB_HOST: postgres
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - postgres
+    ports:
+      - 3001:3001  # Expose the bot to your host machine
+    # volumes:
+    #   - .:/home/node/app
+    #   - /home/node/app/node_modules
 volumes:
   pgdata:
+
