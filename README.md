@@ -3,17 +3,21 @@
 RainnyJS is a Discord bot written in NodeJS. It supports PostgreSQL for database as well as chatbot features using the OpenRouter platform.
 
 # Installation
-Clone the repository
+There are two ways to install RainnyJS: 
+- [Container only](#docker)
+- [NodeJS with PostgreSQL container](#nodejs)
+
+## Pre-requisites
+
+1. First clone the repository
 ```
 https://github.com/Rainkoyi/RainnyJS.git
 ```
-## Prerequisites
-- The latest LTS version of NodeJS: https://nodejs.org/
-- Docker desktop: https://www.docker.com/products/docker-desktop/
 
-## Configuration
-Create a file called `.env` in the root directory that includes the following
+2. Create a file called `.env` in the root directory that includes the following
 ```env
+# Application Environment
+PORT=
 # Discord
 API_KEY=
 BOT_ID=
@@ -29,15 +33,34 @@ DB_USER=
 DB_PASSWORD=
 DB_NAME=
 ```
-## Setup
-Go to the root directory of the project and run the following command to install the dependencies:
+3. Install Docker and Docker Compose, the easiest way to do this is to install Docker Desktop: https://www.docker.com/products/docker-desktop/
+
+## Docker
+
+Go to the root directory of the project and run the following command to build the container:
 ```
-cd RainnyJS
+docker-compose up --build
+```
+To run the container in the background, use the `-d` flag:
+```
+docker-compose up --build -d
+```
+To stop the container, run:
+```
+docker-compose down
+```
+## NodeJS
+RainnyJS can also be run without Docker. This is useful if you want to run the bot locally.
+
+1. Install version v22.15.0 LTS of NodeJS and NPM: https://nodejs.org/
+
+2. Go to the root directory of the project and run the following command to install the dependencies:
+```
 npm install
 ```
 Set up the postgres database using Docker:
 ```
-docker-compose up -d
+docker-compose up postgres -d --build
 ```
 Create tables and register commands
 ```
