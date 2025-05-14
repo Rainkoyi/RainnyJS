@@ -19,6 +19,8 @@ services:
     container_name: discord_bot
     restart: always
     environment:
+      # Application Environment
+      PORT: ${PORT}
       # Discord
       API_KEY: ${API_KEY}
       BOT_ID: ${BOT_ID}
@@ -36,7 +38,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - 3001:3001  # Expose the bot to your host machine
+      - "${PORT}:${PORT}"  # Expose the bot to your host machine
     # volumes:
     #   - .:/home/node/app
     #   - /home/node/app/node_modules

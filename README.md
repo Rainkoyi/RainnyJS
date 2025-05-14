@@ -14,6 +14,8 @@ https://github.com/Rainkoyi/RainnyJS.git
 ## Configuration
 Create a file called `.env` in the root directory that includes the following
 ```env
+# Application Environment
+PORT=
 # Discord
 API_KEY=
 BOT_ID=
@@ -37,7 +39,7 @@ npm install
 ```
 Set up the postgres database using Docker:
 ```
-docker-compose up -d
+docker-compose up --build
 ```
 Create tables and register commands
 ```
